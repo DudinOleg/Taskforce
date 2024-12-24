@@ -1,0 +1,70 @@
+{
+  "name": "taskforce/taskforce",
+  "description": "desc",
+  "minimum-stability": "dev",
+  "license": "proprietary",
+  "authors": [
+    {
+      "name": "Kirill Senkevich",
+      "email": "frexin@htmlacademy.ru"
+    }
+  ],
+  "require": {
+    "php": ">=7.3",
+    "yiisoft/yii2": "~2.0.14",
+    "yiisoft/yii2-swiftmailer": "~2.0.0 || ~2.1.0",
+    "wapmorgan/morphos": "dev-master",
+    "yandex/geo": "1.2.2.*",
+    "ext-pdo": "*",
+    "la-haute-societe/yii2-save-relations-behavior": "*",
+    "yiisoft/yii2-authclient": "^2.2"
+  },
+  "require-dev": {
+    "yiisoft/yii2-debug": "~2.1.0",
+    "yiisoft/yii2-gii": "~2.1.0",
+    "yiisoft/yii2-faker": "2.0.x-dev"
+  },
+  "config": {
+    "process-timeout": 1800,
+    "fxp-asset": {
+      "enabled": false
+    }
+  },
+  "scripts": {
+    "post-install-cmd": [
+      "yii\\composer\\Installer::postInstall"
+    ],
+    "post-create-project-cmd": [
+      "yii\\composer\\Installer::postCreateProject",
+      "yii\\composer\\Installer::postInstall"
+    ]
+  },
+  "extra": {
+    "yii\\composer\\Installer::postCreateProject": {
+      "setPermission": [
+        {
+          "runtime": "0777",
+          "web/assets": "0777",
+          "yii": "0755"
+        }
+      ]
+    },
+    "yii\\composer\\Installer::postInstall": {
+      "generateCookieValidationKey": [
+        "config/web.php"
+      ]
+    }
+  },
+  "repositories": [
+    {
+      "type": "composer",
+      "url": "https://asset-packagist.org"
+    }
+  ],
+
+  "autoload": {
+    "psr-4": {
+      "frexin\\": "src/"
+    }
+  }
+}
